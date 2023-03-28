@@ -7,10 +7,10 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
 
-namespace WebAddressbookTests
+namespace addressbook_web_tests
 {
     [TestFixture]
-    public class GroupCreationTests
+    public class CreationGroupTests
     {
         private IWebDriver driver;
         private StringBuilder verificationErrors;
@@ -21,7 +21,7 @@ namespace WebAddressbookTests
         public void SetupTest()
         {
             driver = new FirefoxDriver();
-            baseURL = "http://localhost:8081/addressbook/";
+            baseURL = "http://localhost:8081/addressbook";
             verificationErrors = new StringBuilder();
         }
 
@@ -40,7 +40,7 @@ namespace WebAddressbookTests
         }
 
         [Test]
-        public void GroupCreationTests()
+        public void CreationGroupTest()
         {
             driver.Navigate().GoToUrl(baseURL);
             driver.FindElement(By.Name("user")).Click();
@@ -53,13 +53,13 @@ namespace WebAddressbookTests
             driver.FindElement(By.Name("new")).Click();
             driver.FindElement(By.Name("group_name")).Click();
             driver.FindElement(By.Name("group_name")).Clear();
-            driver.FindElement(By.Name("group_name")).SendKeys("q");
+            driver.FindElement(By.Name("group_name")).SendKeys("test");
             driver.FindElement(By.Name("group_header")).Click();
             driver.FindElement(By.Name("group_header")).Clear();
-            driver.FindElement(By.Name("group_header")).SendKeys("q");
+            driver.FindElement(By.Name("group_header")).SendKeys("test");
             driver.FindElement(By.Name("group_footer")).Click();
             driver.FindElement(By.Name("group_footer")).Clear();
-            driver.FindElement(By.Name("group_footer")).SendKeys("q");
+            driver.FindElement(By.Name("group_footer")).SendKeys("test");
             driver.FindElement(By.Name("submit")).Click();
             driver.FindElement(By.LinkText("group page")).Click();
             driver.FindElement(By.LinkText("Logout")).Click();
@@ -113,4 +113,3 @@ namespace WebAddressbookTests
         }
     }
 }
-
