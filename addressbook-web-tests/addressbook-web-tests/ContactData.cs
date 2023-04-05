@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace addressbook_web_tests
+namespace WebAddressBookTests
 {
-    internal class ContactData
+    public class ContactData
     {
         private string firstName;
         private string middleName;

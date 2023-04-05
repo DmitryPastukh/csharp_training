@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace addressbook_web_tests
+namespace WebAddressBookTests
 {
-    internal class GroupData
+    public class GroupData
     {
         private string name;
         private string header = "";
