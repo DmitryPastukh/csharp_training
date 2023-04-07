@@ -10,12 +10,14 @@ using OpenQA.Selenium.Support.UI;
 
 namespace WebAddressBookTests
 {
-    public class LoginHelper
+    public class LoginHelper : HelperBase
     {
         private IWebDriver driver;
 
-        public LoginHelper(IWebDriver driver) {
-            this.driver = driver;
+        public LoginHelper(IWebDriver driver) 
+              :base(driver)
+        {
+
         }
             
         public void Login(AccountData account)
@@ -28,5 +30,11 @@ namespace WebAddressBookTests
             driver.FindElement(By.Name("pass")).SendKeys(account.Password);
             driver.FindElement(By.XPath("//input[@value='Login']")).Click();
         }
+        public void Logout()
+        {
+            driver.FindElement(By.LinkText("Logout")).Click();
+        }
     }
+
+    
 }

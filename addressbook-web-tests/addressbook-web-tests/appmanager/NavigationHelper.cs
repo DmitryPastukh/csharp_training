@@ -10,24 +10,28 @@ using OpenQA.Selenium.Support.UI;
 
 namespace WebAddressBookTests
 {
-    public class NavigationHelper
+    public class NavigationHelper : HelperBase
     {
         private IWebDriver driver;
         private string baseURL;
 
-        public NavigationHelper(IWebDriver driver, string baseURL)
-        {
-            this.driver = driver;
-            this.baseURL = baseURL;
+        public NavigationHelper(IWebDriver driver, string baseURL) 
+            : base(driver) 
+        { 
+         this.baseURL = baseURL;
         }
 
         public void GoToHomePage()
         {
             driver.Navigate().GoToUrl(baseURL);
         }
-        public void GoToGroupPage()
+        public void GoToGroupsPage()
         {
             driver.FindElement(By.LinkText("groups")).Click();
+        }
+        public void ReturToHomePage()
+        {
+            driver.FindElement(By.LinkText("home page")).Click();
         }
     }
 }
