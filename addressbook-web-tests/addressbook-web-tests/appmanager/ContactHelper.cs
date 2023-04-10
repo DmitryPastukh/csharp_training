@@ -12,18 +12,29 @@ namespace WebAddressBookTests
     public class ContactHelper : HelperBase
     { 
         
-        private IWebDriver driver;
+        
 
-        public ContactHelper(IWebDriver driver) 
-            : base(driver) 
+        public ContactHelper(ApplicationManager manager) 
+            : base(manager) 
         { 
         }
-       
-        public void SubmitContactCreation()
+        public ContactHelper Create(ContactData contact)
+        {
+
+            manager.Navigator.GoToHomePage();
+            InitNewContactCreation();
+            FillContactForm(contact);
+            SubmitContactCreation();
+           
+
+            return this;
+        }
+        public ContactHelper SubmitContactCreation()
         {
             driver.FindElement(By.XPath("//div[@id='content']/form/input[21]")).Click();
+            return this;
         }
-        public void FillContactForm(ContactData contact)
+        public ContactHelper FillContactForm(ContactData contact)
         {
             driver.FindElement(By.Name("firstname")).Click();
             driver.FindElement(By.Name("firstname")).Clear();
@@ -31,11 +42,22 @@ namespace WebAddressBookTests
             driver.FindElement(By.Name("lastname")).Click();
             driver.FindElement(By.Name("lastname")).Clear();
             driver.FindElement(By.Name("lastname")).SendKeys(contact.LastName);
+            driver.FindElement(By.Name("firstname")).Click();
+            driver.FindElement(By.Name("firstname")).Clear();
+            driver.FindElement(By.Name("firstname")).SendKeys(contact.FirstName);
+            driver.FindElement(By.Name("firstname")).Click();
+            driver.FindElement(By.Name("firstname")).Clear();
+            driver.FindElement(By.Name("firstname")).SendKeys(contact.FirstName); 
+            driver.FindElement(By.Name("firstname")).Click();
+            driver.FindElement(By.Name("firstname")).Clear();
+            driver.FindElement(By.Name("firstname")).SendKeys(contact.FirstName);
+            return this;
         }
-        public void InitNewContactCreation()
+        public ContactHelper InitNewContactCreation()
         {
             driver.FindElement(By.LinkText("add new")).Click();
 
+            return this;
         }
     }
 }

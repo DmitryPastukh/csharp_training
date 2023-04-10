@@ -18,9 +18,7 @@ namespace WebAddressBookTests
         [Test]
         public void ContactCreationTest()
         {
-            app.Navigator.GoToHomePage();
-            app.Auth.Login(new AccountData("admin", "secret"));
-            app.Contact.InitNewContactCreation();
+            
             ContactData contact = new ContactData("");
             contact.LastName = "Иванов";
             contact.MiddleName = "";
@@ -42,10 +40,9 @@ namespace WebAddressBookTests
             contact.SecondaryAddress = "";
             contact.SecondaryHome = "";
             contact.SecondaryNotes = "";
-            app.Contact.FillContactForm(contact);
-            app.Contact.SubmitContactCreation();
+            app.Contact.Create(contact);
             app.Navigator.ReturToHomePage();
-            app.Auth.Logout();
+            
         }
 
        

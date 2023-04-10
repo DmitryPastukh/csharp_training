@@ -10,7 +10,7 @@ using OpenQA.Selenium.Support.UI;
 
 namespace WebAddressBookTests
 {
-    public class ApplicationManager 
+    public class ApplicationManager
 
     {
         protected IWebDriver driver;
@@ -24,10 +24,19 @@ namespace WebAddressBookTests
 
         public ApplicationManager()
         {
-            loginHelper = new LoginHelper(driver);
-            navigator = new NavigationHelper(driver, baseURL);
-            groupHelper = new GroupHelper(driver);
-            contactHelper = new ContactHelper(driver);
+            driver = new FirefoxDriver();
+            baseURL = "http://localhost:8081/addressbook";
+            loginHelper = new LoginHelper(this);
+            navigator = new NavigationHelper(this, baseURL);
+            groupHelper = new GroupHelper(this);
+            contactHelper = new ContactHelper(this);
+        }
+        public IWebDriver Driver
+        {
+            get
+            {
+                return driver;
+            }
         }
 
         public void Stop()
@@ -41,7 +50,7 @@ namespace WebAddressBookTests
                 // Ignore errors if unable to close the browser
             }
         }
-    public LoginHelper Auth
+        public LoginHelper Auth
         {
             get
             {
@@ -73,6 +82,9 @@ namespace WebAddressBookTests
             {
                 return contactHelper;
             }
-        } 
+        }
+
+
+
     }
 }

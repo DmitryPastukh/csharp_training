@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
@@ -12,26 +13,31 @@ namespace WebAddressBookTests
 {
     public class NavigationHelper : HelperBase
     {
-        private IWebDriver driver;
+        //private IWebDriver driver;
         private string baseURL;
 
-        public NavigationHelper(IWebDriver driver, string baseURL) 
-            : base(driver) 
+        public NavigationHelper(ApplicationManager manager, string baseURL) 
+            : base(manager) 
         { 
          this.baseURL = baseURL;
         }
 
-        public void GoToHomePage()
+        public NavigationHelper GoToHomePage()
         {
             driver.Navigate().GoToUrl(baseURL);
+            return this;
+            
         }
-        public void GoToGroupsPage()
+        public NavigationHelper GoToGroupsPage()
         {
             driver.FindElement(By.LinkText("groups")).Click();
+            return this;
         }
-        public void ReturToHomePage()
+        public NavigationHelper ReturToHomePage()
         {
             driver.FindElement(By.LinkText("home page")).Click();
+            return this;
         }
+        
     }
 }
