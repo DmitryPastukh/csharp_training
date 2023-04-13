@@ -28,11 +28,14 @@ namespace WebAddressBookTests
         private string secondaryAddress;
         private string secondaryHome;
         private string secondaryNotes;
+        private string birthday;
+        private string anniversary;
+       
         public ContactData(string lastName)
         {
             this.lastName = lastName;
         }
-        public ContactData(string firstName, string middleName, string lastName, string nickName, string title, string company, string address, string telephoneHome, string home, string mobile, string work, string fax, string email, string email2, string email3, string homePage, string secondaryAddress, string secondaryHome, string secondaryNotes)
+        public ContactData(string firstName, string middleName, string lastName, string nickName, string title, string company, string address, string telephoneHome, string home, string mobile, string work, string fax, string email, string email2, string email3, string homePage, string secondaryAddress, string secondaryHome, string secondaryNotes, string birthday, string anniversary)
         {
             this.firstName = firstName;
             this.middleName = middleName;
@@ -53,6 +56,8 @@ namespace WebAddressBookTests
             this.secondaryAddress = secondaryAddress;
             this.secondaryHome = secondaryHome;
             this.secondaryNotes = secondaryNotes;
+            this.birthday = birthday;
+            this.birthday = anniversary;
         }
         public string FirstName
         {
@@ -197,7 +202,7 @@ namespace WebAddressBookTests
             }
             set
             {
-               email = value;
+                email = value;
             }
         }
         public string Email2
@@ -266,6 +271,28 @@ namespace WebAddressBookTests
                 secondaryNotes = value;
             }
         }
+         public string Birthday
+        {
+            get
+            {
+                return birthday;
+            }
+            set
+            {
+                birthday = value;
+            }
+        }
+        public string Anniversary
+        {
+            get
+            {
+                return anniversary;
+            }
+            set
+            {
+                anniversary = value;
+            }
+        }
     }
-    }
+}
 

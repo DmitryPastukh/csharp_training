@@ -4,9 +4,7 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using Microsoft.Win32.SafeHandles;
 using NUnit.Framework;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.Support.UI;
+
 
 namespace WebAddressBookTests
 {
@@ -20,26 +18,29 @@ namespace WebAddressBookTests
         {
             
             ContactData contact = new ContactData("");
-            contact.LastName = "Иванов";
-            contact.MiddleName = "";
-            contact.FirstName = "Иван";
-            contact.Address = "";
-            contact.Email = "";
-            contact.Email2 = "";
-            contact.NickName = "";
-            contact.Title = "";
-            contact.Company = "";
-            contact.TelephoneHome = "";
-            contact.Mobile = "";
-            contact.Work = "";
-            contact.Fax = "";
-            contact.Email = "";
-            contact.Email2 = "";
-            contact.Email3 = "";
-            contact.HomePage = "";
-            contact.SecondaryAddress = "";
-            contact.SecondaryHome = "";
-            contact.SecondaryNotes = "";
+            contact.LastName = "ooooo";
+            contact.MiddleName = "oooo";
+            contact.FirstName = "ooo";
+            contact.Address = "ooo";
+            contact.Email = "oo";
+            contact.Email2 = "oooo";
+            contact.NickName = "oooo";
+            contact.Title = "oooo";
+            contact.Company = "oooo";
+            contact.TelephoneHome = "oooo";
+            contact.Mobile = "ooooo";
+            contact.Work = "xxoooxx";
+            contact.Fax = "xooooxx";
+            contact.Email = "oooo";
+            contact.Email2 = "oooo";
+            contact.Email3 = "oooo";
+            contact.HomePage = "oooo";
+            contact.SecondaryAddress = "ooooo";
+            contact.SecondaryHome = "xxooooxx";
+            contact.SecondaryNotes = "oooo";
+            contact.Birthday = "ooooo";
+            contact.Anniversary = "ooooo";
+            contact.Home = "ooooo";
             app.Contact.Create(contact);
             app.Navigator.ReturToHomePage();
             

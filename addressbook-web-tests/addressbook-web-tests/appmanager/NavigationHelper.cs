@@ -13,7 +13,7 @@ namespace WebAddressBookTests
 {
     public class NavigationHelper : HelperBase
     {
-        //private IWebDriver driver;
+        
         private string baseURL;
 
         public NavigationHelper(ApplicationManager manager, string baseURL) 
