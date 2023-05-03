@@ -72,6 +72,7 @@ namespace WebAddressBookTests
         internal ContactHelper Modify(int index, ContactData newData)
         {
             manager.Navigator.GoToHomePage();
+            CheckContact();
             InitContactModification(index);
             FillContactForm(newData);
             SubmitContactModification();
@@ -94,6 +95,7 @@ namespace WebAddressBookTests
         {
 
             manager.Navigator.GoToHomePage();
+            CheckContact();
             SelectContact(p);
             RemoveContact();
             driver.SwitchTo().Alert().Accept();
@@ -111,6 +113,41 @@ namespace WebAddressBookTests
         private ContactHelper SelectContact(int index)
         {
             driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + index + "]")).Click();
+            return this;
+        }
+        public ContactHelper CheckContact()
+        {
+            ContactData contact = new ContactData("");
+            if (IsElementPresent(By.Name("selected[]")))
+            {
+                return this;
+            }
+            
+            contact.LastName = "тест";
+            contact.MiddleName = "тест";
+            contact.FirstName = "тест";
+            contact.Address = "тест";
+            contact.Email = "тест";
+            contact.Email2 = "тест";
+            contact.NickName = "тест";
+            contact.Title = "тест";
+            contact.Company = "тест";
+            contact.TelephoneHome = "тест";
+            contact.Mobile = "тест";
+            contact.Work = "тест";
+            contact.Fax = "тест";
+            contact.Email = "тест";
+            contact.Email2 = "тест";
+            contact.Email3 = "тест";
+            contact.HomePage = "тест";
+            contact.SecondaryAddress = "тест";
+            contact.SecondaryHome = "тест";
+            contact.SecondaryNotes = "ooтестoo";
+            contact.Birthday = "тест";
+            contact.Anniversary = "тест";
+            contact.Home = "тест";
+            Create(contact);
+            manager.Navigator.GoToHomePage();
             return this;
         }
     }

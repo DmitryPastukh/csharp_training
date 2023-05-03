@@ -17,7 +17,7 @@ namespace WebAddressBookTests
 
             
            
-            GroupData group = new GroupData("aaa");
+            GroupData group = new GroupData("ввввв");
              
             group.Header = "ddd";
             group.Footer = "fff";

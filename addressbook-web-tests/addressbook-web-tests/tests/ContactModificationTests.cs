@@ -17,7 +17,7 @@ namespace WebAddressBookTests
         public void ContactModificationTest()
         {
             ContactData newData = new ContactData("");
-            newData.LastName = "11111";
+            newData.LastName = "тест";
             newData.MiddleName = "22222";
             newData.FirstName = "s33333d333333ds";
             newData.Address = "";
@@ -40,8 +40,9 @@ namespace WebAddressBookTests
             newData.Home = "ooooo";
             newData.Birthday = "ooooo";
             newData.Anniversary = "ooooo";
-            app.Contact.Modify(2, newData);
+            app.Contact.Modify(1, newData);
             app.Navigator.ReturToHomePage();
+            
 
 
         }

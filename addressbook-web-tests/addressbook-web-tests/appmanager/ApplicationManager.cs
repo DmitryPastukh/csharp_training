@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
-using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
 
@@ -28,6 +27,7 @@ namespace WebAddressBookTests
         private ApplicationManager()
         {
             driver = new FirefoxDriver();
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(2);
             baseURL = "http://localhost:8081";
             loginHelper = new LoginHelper(this);
             navigator = new NavigationHelper(this, baseURL);
