@@ -97,17 +97,7 @@ namespace WebAddressBookTests
             }
         }
 
-        public string LastName
-        {
-            get
-            {
-                return lastName;
-            }
-            set
-            {
-                lastName = value;
-            }
-        }
+       
         public string NickName
         {
             get
