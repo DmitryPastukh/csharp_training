@@ -16,6 +16,7 @@ namespace WebAddressBookTests
         [Test]
         public void ContactModificationTest()
         {
+            app.Contact.CheckContact();
             ContactData newData = new ContactData("");
             newData.LastName = "тест";
             newData.MiddleName = "22222";

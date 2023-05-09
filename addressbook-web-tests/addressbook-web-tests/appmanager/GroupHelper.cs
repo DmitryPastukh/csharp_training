@@ -32,7 +32,7 @@ namespace WebAddressBookTests
          public GroupHelper Modify(int p, GroupData newData)
         {
             manager.Navigator.GoToGroupsPage();
-            CheckGroup();
+           
             SelectGroup(p);
             InitGroupModification();
             FillGroupForm(newData);
@@ -49,7 +49,7 @@ namespace WebAddressBookTests
             
 
             manager.Navigator.GoToGroupsPage();
-            CheckGroup();
+            
             
             SelectGroup(index);
             RemoveGroup();
@@ -96,7 +96,7 @@ namespace WebAddressBookTests
         }
         public GroupHelper SelectGroup(int index)
         {
-            driver.FindElement(By.XPath("//input[@name='selected[]'][" + (index+1) + "]")).Click();
+            driver.FindElement(By.XPath("//input[@name='selected[]'][" + (index) + "]")).Click();
             return this;
         }
 
@@ -124,9 +124,9 @@ namespace WebAddressBookTests
             return this; 
             }
 
-        public List<GroupData> GetGroupList()
+      public List<GroupData> GetGroupList()
         {
-            List<GroupData> groups = new List<GroupData>();
+           List<GroupData> groups = new List<GroupData>();
             manager.Navigator.GoToGroupsPage();
             ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("span.group"));
             foreach (IWebElement element in elements) 

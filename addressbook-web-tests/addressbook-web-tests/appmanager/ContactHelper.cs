@@ -72,7 +72,7 @@ namespace WebAddressBookTests
         internal ContactHelper Modify(int index, ContactData newData)
         {
             manager.Navigator.GoToHomePage();
-            CheckContact();
+            
             InitContactModification(index);
             FillContactForm(newData);
             SubmitContactModification();
@@ -95,7 +95,7 @@ namespace WebAddressBookTests
         {
 
             manager.Navigator.GoToHomePage();
-            CheckContact();
+            
             SelectContact(p);
             RemoveContact();
             driver.SwitchTo().Alert().Accept();

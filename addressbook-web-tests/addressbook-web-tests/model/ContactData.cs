@@ -31,7 +31,7 @@ namespace WebAddressBookTests
         private string birthday;
         private string anniversary;
 
-        public string Lastname { get; private set; }
+        
 
         public ContactData(string lastName)
         {
@@ -48,6 +48,12 @@ namespace WebAddressBookTests
             
 
         }
+
+        public int CompareTo(ContactData other)
+        {
+            throw new NotImplementedException();
+        }
+
         public ContactData(string firstName, string middleName, string lastName, string nickName, string title, string company, string address, string telephoneHome, string home, string mobile, string work, string fax, string email, string email2, string email3, string homePage, string secondaryAddress, string secondaryHome, string secondaryNotes, string birthday, string anniversary)
         {
             this.firstName = firstName;
@@ -296,6 +302,18 @@ namespace WebAddressBookTests
                 anniversary = value;
             }
         }
+        public string LastName
+        {
+            get
+            {
+                return lastName;
+            }
+            set
+            {
+                lastName = value;
+            }
+        }
+
     }
 }
 
