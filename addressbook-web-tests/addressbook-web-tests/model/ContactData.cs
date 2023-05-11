@@ -33,50 +33,73 @@ namespace WebAddressBookTests
 
         
 
-        public ContactData(string lastName)
+       public ContactData(string lastName)
         {
-            this.lastName = lastName;
-        }
+          this.lastName = lastName;
+       }
         public bool Equals(ContactData other)
         {
-            if (other is null)
+            if (Object.ReferenceEquals(other, null))
             {
                 return false;
             }
-            return lastName == other.lastName && firstName == other.firstName;
-                
-            
+            if (Object.ReferenceEquals(this, other))
+            {
+                return true; 
+            }
+
+            return LastName == other.LastName && FirstName == other.FirstName;
+
+        }
+        public override string ToString()
+        {
+            return FirstName + LastName;
 
         }
 
+        public override int GetHashCode()
+        {
+            return LastName.GetHashCode() + FirstName.GetHashCode();
+        }
         public int CompareTo(ContactData other)
         {
-            throw new NotImplementedException();
+            if (other is null)
+            {
+                return 1;
+            }
+             if (this.LastName == other.LastName)
+             {
+            
+                return this.FirstName.CompareTo(other.FirstName);
+            }
+               return this.LastName.CompareTo(other.LastName);
         }
-
-        public ContactData(string firstName, string middleName, string lastName, string nickName, string title, string company, string address, string telephoneHome, string home, string mobile, string work, string fax, string email, string email2, string email3, string homePage, string secondaryAddress, string secondaryHome, string secondaryNotes, string birthday, string anniversary)
+            
+                    
+       
+        public ContactData(string firstName,string lastName)
         {
             this.firstName = firstName;
-            this.middleName = middleName;
+           // this.middleName = middleName;
             this.lastName = lastName;
-            this.nickName = nickName;
-            this.title = title;
-            this.company = company;
-            this.address = address;
-            this.telephoneHome = telephoneHome;
-            this.home = home;
-            this.mobile = mobile;
-            this.work = work;
-            this.fax = fax;
-            this.email = email;
-            this.email2 = email2;
-            this.email3 = email3;
-            this.homePage = homePage;
-            this.secondaryAddress = secondaryAddress;
-            this.secondaryHome = secondaryHome;
-            this.secondaryNotes = secondaryNotes;
-            this.birthday = birthday;
-            this.birthday = anniversary;
+           //this.nickName = nickName;
+            //this.title = title;
+           // this.company = company;
+           // this.address = address;
+           // this.telephoneHome = telephoneHome;
+            //this.home = home;
+            //this.mobile = mobile;
+            //this.work = work;
+            //this.fax = fax;
+           // this.email = email;
+           // this.email2 = email2;
+            //this.email3 = email3;
+            //this.homePage = homePage;
+            //this.secondaryAddress = secondaryAddress;
+           // this.secondaryHome = secondaryHome;
+            //this.secondaryNotes = secondaryNotes;
+            //this.birthday = birthday;
+            //this.birthday = anniversary;
         }
         public string FirstName
         {

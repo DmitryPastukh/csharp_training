@@ -20,7 +20,7 @@ namespace WebAddressBookTests
 
         public bool Equals(GroupData other)
         {
-            if (Object.ReferenceEquals(other, null)) 
+            if (other is null) 
             { 
                 return false; 
             }
@@ -44,7 +44,7 @@ namespace WebAddressBookTests
 
         public  int CompareTo(GroupData other)
         {
-            if (Object.ReferenceEquals(other, null))
+            if (other is null)
             {
                 return 1; 
             }
