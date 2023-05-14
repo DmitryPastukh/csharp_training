@@ -47,7 +47,9 @@ namespace WebAddressBookTests
            
 
             app.Contact.Create(contact);
-            //app.Navigator.ReturToHomePage();
+            
+            Assert.AreEqual(oldContact.Count + 1, app.Contact.GetContactCount());
+            app.Navigator.ReturToHomePage();
             
             List<ContactData> newContact = app.Contact.GetContactList();
             oldContact.Add(contact);

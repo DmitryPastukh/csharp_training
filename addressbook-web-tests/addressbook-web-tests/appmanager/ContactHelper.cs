@@ -33,6 +33,7 @@ namespace WebAddressBookTests
         public ContactHelper SubmitContactCreation()
         {
             driver.FindElement(By.XPath("//div[@id='content']/form/input[21]")).Click();
+            contactCache = null;
             return this;
         }
         public ContactHelper FillContactForm(ContactData contact)
@@ -83,6 +84,7 @@ namespace WebAddressBookTests
         private ContactHelper SubmitContactModification()
         {
             driver.FindElement(By.XPath("(//*[@name='update'])[1]")).Click();
+            contactCache = null;
             return this;
         }
 
@@ -107,12 +109,18 @@ namespace WebAddressBookTests
         private ContactHelper RemoveContact()
         {
             driver.FindElement(By.XPath("//*[@value='Delete']")).Click();
+            contactCache = null;
             return this;
         }
 
         private ContactHelper SelectContact(int index)
         {
             driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + (index + 1) + "]")).Click();
+            return this;
+        }
+        public ContactHelper SelectContact(String id)
+        {
+            driver.FindElement(By.XPath("(//input[@name='selected[]' and @value='" + id + "'])")).Click();
             return this;
         }
         public ContactHelper CheckContact()
@@ -125,46 +133,59 @@ namespace WebAddressBookTests
             }
 
             contact.LastName = "тест";
-           // contact.MiddleName = "тест";
+            // contact.MiddleName = "тест";
             contact.FirstName = "тест";
-           // contact.Address = "тест";
-           // contact.Email = "тест";
-           // contact.Email2 = "тест";
-           // contact.NickName = "тест";
-           // contact.Title = "тест";
-           // contact.Company = "тест";
-           // contact.TelephoneHome = "тест";
-           // contact.Mobile = "тест";
-           // contact.Work = "тест";
-          //  contact.Fax = "тест";
-          //  contact.Email = "тест";
-          //  contact.Email2 = "тест";
-          //  contact.Email3 = "тест";
-          //  contact.HomePage = "тест";
-           // contact.SecondaryAddress = "тест";
-          //  contact.SecondaryHome = "тест";
-          //  contact.SecondaryNotes = "ooтестoo";
-          //  contact.Birthday = "тест";
-           // contact.Anniversary = "тест";
-           // contact.Home = "тест";
+            // contact.Address = "тест";
+            // contact.Email = "тест";
+            // contact.Email2 = "тест";
+            // contact.NickName = "тест";
+            // contact.Title = "тест";
+            // contact.Company = "тест";
+            // contact.TelephoneHome = "тест";
+            // contact.Mobile = "тест";
+            // contact.Work = "тест";
+            //  contact.Fax = "тест";
+            //  contact.Email = "тест";
+            //  contact.Email2 = "тест";
+            //  contact.Email3 = "тест";
+            //  contact.HomePage = "тест";
+            // contact.SecondaryAddress = "тест";
+            //  contact.SecondaryHome = "тест";
+            //  contact.SecondaryNotes = "ooтестoo";
+            //  contact.Birthday = "тест";
+            // contact.Anniversary = "тест";
+            // contact.Home = "тест";
             Create(contact);
             manager.Navigator.GoToHomePage();
             return this;
         }
+        private List<ContactData> contactCache = null;
 
         public List<ContactData> GetContactList()
         {
-            List<ContactData> contacts = new List<ContactData>();
-            manager.Navigator.GoToHomePage();
-            ICollection<IWebElement> elements = driver.FindElements(By.Name("entry"));
-            foreach (IWebElement element in elements)
+            if (contactCache == null)
             {
-                IList<IWebElement> cells = element.FindElements(By.TagName("td"));
-                contacts.Add(new ContactData(cells[2].Text, cells[1].Text));
+                contactCache = new List<ContactData>();
 
+
+                manager.Navigator.GoToHomePage();
+                ICollection<IWebElement> elements = driver.FindElements(By.Name("entry"));
+                foreach (IWebElement element in elements)
+                {
+                    IList<IWebElement> cells = element.FindElements(By.TagName("td"));
+                    contactCache.Add(new ContactData(cells[2].Text, cells[1].Text));
+
+                }
             }
-            return contacts;
+
+            return new List<ContactData>(contactCache);
         }
+        public int GetContactCount()
+        {
+           manager.Navigator.ReturToHomePage();
+            return driver.FindElements(By.Name("entry")).Count;
+        }
+
+
     }
 }
-

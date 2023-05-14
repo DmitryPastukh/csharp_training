@@ -101,6 +101,7 @@ namespace WebAddressBookTests
             //this.birthday = birthday;
             //this.birthday = anniversary;
         }
+
         public string FirstName
         {
             get
@@ -336,7 +337,11 @@ namespace WebAddressBookTests
                 lastName = value;
             }
         }
+            public string Id { get; set; }
 
     }
-}
+
+
+    }
+
 

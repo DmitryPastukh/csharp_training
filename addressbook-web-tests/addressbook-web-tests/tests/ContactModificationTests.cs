@@ -44,15 +44,28 @@ namespace WebAddressBookTests
             newData.Home = "ooooo";
             newData.Birthday = "ooooo";
             newData.Anniversary = "ooooo";
+
+            ContactData oldData = oldContact[0];
            
             
             app.Contact.Modify(0, newData);
+            Assert.AreEqual(oldContact.Count, app.Contact.GetContactCount());
             List<ContactData> newContact = app.Contact.GetContactList();
             oldContact[0].FirstName = newData.FirstName;
             oldContact[0].LastName = newData.LastName;
             oldContact.Sort();
             newContact.Sort();
             Assert.AreEqual(oldContact, newContact);
+
+            foreach (ContactData contact in newContact)
+            {
+                if (contact.Id == oldData.Id)
+                {
+                    Assert.AreEqual(newData.FirstName, contact.FirstName);
+                    Assert.AreEqual(newData.LastName, contact.LastName);
+
+                }
+            }
 
             app.Navigator.ReturToHomePage();
             
