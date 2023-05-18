@@ -2,11 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
+
+
 
 namespace WebAddressBookTests
 {
@@ -40,8 +44,8 @@ namespace WebAddressBookTests
         {
             Type(By.Name("firstname"), contact.FirstName);
             Type(By.Name("lastname"), contact.LastName);
-            // Type(By.Name("middlename"), contact.MiddleName);
-            // Type(By.Name("nickname"), contact.NickName);
+          //  Type(By.Name("middlename"), contact.MiddleName);
+            //Type(By.Name("nickname"), contact.NickName);
             // Type(By.Name("title"), contact.Title);
             //Type(By.Name("company"), contact.Company);
             //Type(By.Name("address"), contact.Address);
@@ -51,13 +55,13 @@ namespace WebAddressBookTests
             // Type(By.Name("fax"), contact.Fax);
             //Type(By.Name("email"), contact.Email);
             // Type(By.Name("email2"), contact.Email2);
-            //Type(By.Name("email3"), contact.Email3);
-            // Type(By.Name("homepage"), contact.HomePage);
-            // Type(By.Name("byear"), contact.Birthday);
-            //Type(By.Name("ayear"), contact.Anniversary);
-            // Type(By.Name("address2"), contact.SecondaryAddress);
+           // Type(By.Name("email3"), contact.Email3);
+           //  Type(By.Name("homepage"), contact.HomePage);
+           //  Type(By.Name("byear"), contact.Birthday);
+           // Type(By.Name("ayear"), contact.Anniversary);
+           //  Type(By.Name("address2"), contact.SecondaryAddress);
             //Type(By.Name("phone2"), contact.SecondaryHome);
-            //Type(By.Name("notes"), contact.SecondaryNotes);
+           // Type(By.Name("notes"), contact.SecondaryNotes);
 
 
 
@@ -133,7 +137,7 @@ namespace WebAddressBookTests
             }
 
             contact.LastName = "тест";
-            // contact.MiddleName = "тест";
+           // contact.MiddleName = "тест";
             contact.FirstName = "тест";
             // contact.Address = "тест";
             // contact.Email = "тест";
@@ -143,17 +147,17 @@ namespace WebAddressBookTests
             // contact.Company = "тест";
             // contact.TelephoneHome = "тест";
             // contact.Mobile = "тест";
-            // contact.Work = "тест";
-            //  contact.Fax = "тест";
-            //  contact.Email = "тест";
-            //  contact.Email2 = "тест";
-            //  contact.Email3 = "тест";
-            //  contact.HomePage = "тест";
-            // contact.SecondaryAddress = "тест";
-            //  contact.SecondaryHome = "тест";
-            //  contact.SecondaryNotes = "ooтестoo";
-            //  contact.Birthday = "тест";
-            // contact.Anniversary = "тест";
+            //contact.Work = "тест";
+            // contact.Fax = "тест";
+             // contact.Email = "тест";
+            // contact.Email2 = "тест";
+             // contact.Email3 = "тест";
+             // contact.HomePage = "тест";
+             //contact.SecondaryAddress = "тест";
+             //contact.SecondaryHome = "тест";
+              //contact.SecondaryNotes = "ooтестoo";
+             // contact.Birthday = "тест";
+             //contact.Anniversary = "тест";
             // contact.Home = "тест";
             Create(contact);
             manager.Navigator.GoToHomePage();
@@ -182,10 +186,65 @@ namespace WebAddressBookTests
         }
         public int GetContactCount()
         {
-           manager.Navigator.ReturToHomePage();
+            manager.Navigator.ReturToHomePage();
             return driver.FindElements(By.Name("entry")).Count;
         }
 
+        internal ContactData GetContactInformationFromTable(int index)
+        {
+            manager.Navigator.GoToHomePage();
+            IList<IWebElement> cells = driver.FindElements(By.Name("entry"))[index]
+            .FindElements(By.TagName("td"));
+            string lastName = cells[1].Text;
+            string firstName = cells[2].Text;
+            string address = cells[3].Text;
+            string allPhones = cells[5].Text;
+            string allEmail = cells[4].Text;
+
+            return new ContactData(firstName, lastName)
+            {
+                Address = address,
+                AllPhones = allPhones, 
+                AllEmails = allEmail
+                
+            };
+        }
+
+        public ContactData GetContactInformationFromEditForm(int index)
+        {
+            manager.Navigator.GoToHomePage();
+            InitContactModification(0);
+            string firstName = driver.FindElement(By.Name("firstname")).GetAttribute("value");
+            string lastName = driver.FindElement(By.Name("lastname")).GetAttribute("value");
+            string address = driver.FindElement(By.Name("address")).GetAttribute("value");
+            string homePhone = driver.FindElement(By.Name("home")).GetAttribute("value");
+            string mobilePhone = driver.FindElement(By.Name("mobile")).GetAttribute("value");
+            string workPhone = driver.FindElement(By.Name("work")).GetAttribute("value");
+            string email = driver.FindElement(By.Name("email")).GetAttribute("value");
+            string email2 = driver.FindElement(By.Name("email")).GetAttribute("value");
+            string email3 = driver.FindElement(By.Name("email")).GetAttribute("value");
+            string secondaryHome = driver.FindElement(By.Name("phone2")).GetAttribute("value");
+
+            return new ContactData(firstName, lastName)
+            {
+                Address = address,
+                Home = homePhone,
+                Mobile = mobilePhone,
+                Work = workPhone,
+                Email = email,
+                Email2 = email2,
+                Email3 = email3,
+                SecondaryHome = secondaryHome
+                
+            };
+        }
+            public int GetNumberOfSearchResults()
+            {
+            manager.Navigator.GoToHomePage();
+            string text = driver.FindElement(By.TagName("label")).Text;
+              Match m =  new Regex(@"\d+").Match(text);
+                return Int32.Parse(m.Value);
+            }
+        }
 
     }
-}

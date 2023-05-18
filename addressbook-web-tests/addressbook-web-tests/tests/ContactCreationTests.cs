@@ -23,24 +23,24 @@ namespace WebAddressBookTests
             contact.LastName = "qqq";
            // contact.MiddleName = "www";
             contact.FirstName = "www";
-           // contact.Address = "ooo";
-           // contact.Email2 = "oooo";
+            //contact.Address = "ooo";
+          ////  contact.Email2 = "oooo";
            // contact.NickName = "oooo";
-            //contact.Title = "oooo";
+          // contact.Title = "oooo";
            // contact.Company = "oooo";
-            //contact.TelephoneHome = "oooo";
-           // contact.Mobile = "ooooo";
+          // contact.TelephoneHome = "oooo";
+          // contact.Mobile = "ooooo";
            // contact.Work = "xxoooxx";
            // contact.Fax = "xooooxx";
           // contact.Email = "oooo";
-           // contact.Email2 = "oooo";
-           // contact.Email3 = "oooo";
+          //  contact.Email2 = "oooo";
+           //contact.Email3 = "oooo";
            // contact.HomePage = "oooo";
-           // contact.SecondaryAddress = "ooooo";
-           // contact.SecondaryHome = "xxooooxx";
-           // contact.SecondaryNotes = "oooo";
-            //contact.Birthday = "ooooo";
-            //contact.Anniversary = "ooooo";
+          // contact.SecondaryAddress = "ooooo";
+          // contact.SecondaryHome = "xxooooxx";
+          // contact.SecondaryNotes = "oooo";
+           // contact.Birthday = "ooooo";
+           // contact.Anniversary = "ooooo";
            // contact.Home = "ooooo";
 
             
