@@ -221,8 +221,8 @@ namespace WebAddressBookTests
             string mobilePhone = driver.FindElement(By.Name("mobile")).GetAttribute("value");
             string workPhone = driver.FindElement(By.Name("work")).GetAttribute("value");
             string email = driver.FindElement(By.Name("email")).GetAttribute("value");
-            string email2 = driver.FindElement(By.Name("email")).GetAttribute("value");
-            string email3 = driver.FindElement(By.Name("email")).GetAttribute("value");
+            string email2 = driver.FindElement(By.Name("email2")).GetAttribute("value");
+            string email3 = driver.FindElement(By.Name("email3")).GetAttribute("value");
             string secondaryHome = driver.FindElement(By.Name("phone2")).GetAttribute("value");
 
             return new ContactData(firstName, lastName)
