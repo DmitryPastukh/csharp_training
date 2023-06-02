@@ -10,7 +10,8 @@ namespace WebAddressBookTests
 {
     public class ContactData : IEquatable<ContactData>, IComparable<ContactData>
     {
-
+        public ContactData()
+        { }
 
 
         private string nickName;
@@ -31,7 +32,10 @@ namespace WebAddressBookTests
         private string allEmails;
         private string allPhones;
         private string allAddres;
-
+        private string allData;
+        private string firstNameLastNameAddress;
+        private string homeMobileWorkPhone;
+        private string homeMobileWorkPhones;
 
         public ContactData(string lastName)
         {
@@ -85,7 +89,7 @@ namespace WebAddressBookTests
             // NickName = nickName;
             //Title = title;
             // Company = company;
-            /// Address = address;
+            //Address = address;
             //TelephoneHome = telephoneHome;
             //Home = home;
             //Mobile = mobile;
@@ -102,9 +106,9 @@ namespace WebAddressBookTests
             // Anniversary = anniversary;
         }
 
-       // public ContactData(string lastName, string text) : this(lastName)
-       // {
-       // }
+        // public ContactData(string lastName, string text) : this(lastName)
+        // {
+        // }
 
         public string FirstName { get; set; }
 
@@ -151,6 +155,7 @@ namespace WebAddressBookTests
         public string LastName { get; set; }
 
         public string Id { get; set; }
+       
         public string AllPhones
         {
             get
@@ -161,7 +166,7 @@ namespace WebAddressBookTests
                 }
                 else
                 {
-                    return (CleanUpPhone(Home) + CleanUpPhone(Mobile) + CleanUpPhone(Work) + CleanUpPhone(SecondaryHome)).Trim();
+                    return (CleanUpPhone(Home) + CleanUpPhone(Mobile) + CleanUpPhone(Work)).Trim();
                 }
             }
             set
@@ -222,16 +227,241 @@ namespace WebAddressBookTests
                 allPhones = value;
             }
         }
-        private string CleanUpAddres(string addres)
+        public string AllData
         {
-            if (addres == null || addres == "")
+            get
+            {
+                if (allData != null)
+                {
+                    return allData;
+                }
+                else
+                {
+                    return CleanUpFirstNameAddress(FirstNameLastNameAddress) + CleanUpAllPhones(HomeMobileWorkPhones) + CleanUpAll3Email(AllEmails);
+                }
+            }
+            set
+            {
+                allData = value;
+            }
+        }
+
+        private string CleanUpAllPhones(string homeMobileWorkPhones)
+        {
+            if (homeMobileWorkPhones == null || homeMobileWorkPhones == "")
             {
                 return "";
             }
-            return addres + "\r\n";
+            else
+            {
+                if (homeMobileWorkPhones != null || homeMobileWorkPhones != "")
+                {
+                    if (FirstNameLastNameAddress == null || FirstNameLastNameAddress == "")
+                    {
+                        return homeMobileWorkPhones;
+                    }
+                }
+            }
+            return "\r\n\r\n" + homeMobileWorkPhones;
         }
 
 
-    }
+        private object CleanUpAll3Email(string allEmails)
+        {
+            {
+                if (allEmails == null || allEmails == "")
+                {
+                    return "";
+                }
+                else
+                {
+                    if (allEmails != null || allEmails != "")
+                    {
+                        if (FirstNameLastNameAddress == null || FirstNameLastNameAddress == "")
+                        {
+                            if (homeMobileWorkPhones == null || homeMobileWorkPhones == "")
+                            {
+                                return allEmails;
+                            }
+                        }
+                    }
+                }
+                return "\r\n\r\n" + allEmails;
+            }
+        }
 
-}
+
+
+        private string CleanUpFirstNameAddress(string firstNameLastNameAddress)
+        {
+            if (firstNameLastNameAddress == null || firstNameLastNameAddress == "")
+            {
+                return "";
+            }
+            return firstNameLastNameAddress;
+        }
+
+        private string CleanUpAddres(string addres)
+        {  if (addres == null || addres == "")
+            {
+                return "";
+            }
+           return addres + "\r\n";
+        }
+
+
+    
+        private string CheckNewLineNeeded(string v)
+        {
+            if (Address == null || Address == "")
+            {
+                return null;
+            }
+            else
+            {
+                if (Address != null || Address == "")
+                {
+                    if (FirstName != null || FirstName == "")
+                    {
+                        if (LastName == null || LastName == "")
+                        {
+                            return "\r\n";
+                        }
+                    }
+                }
+                if (FirstName == null || FirstName == "")
+                {
+                    if (LastName == null || LastName == "")
+                    {
+                        return "\r\n";
+                    }
+                }
+            }
+            return "\r\n";
+        }
+
+
+        public string FirstNameLastNameAddress
+        {
+            get
+            {
+                if (firstNameLastNameAddress != null)
+                {
+                    return firstNameLastNameAddress;
+                }
+                else
+                {
+
+                    return FirstName + CheckIfSpaceNeeded(" ") + LastName + CheckNewLineNeeded("\r\n") + Address.Trim();
+                }
+            }
+            set
+            {
+                firstNameLastNameAddress = value;
+            }
+        }
+    
+        public string HomeMobileWorkPhones 
+        {
+            get
+            {
+                if (homeMobileWorkPhones != null)
+                {
+                    return homeMobileWorkPhones;
+                }
+                else
+                {
+                    return AddedH(Home) + CheckNewLineBeforeM("\r\n")+
+                    AddedM(Home) + CheckNewLineBeforeW("\r\n") + AddedW(Work);
+                }
+            }
+            set { 
+                homeMobileWorkPhones = value; 
+            }
+            }
+
+        private string AddedW(string work)
+        {
+            if (Work == null || Work == "")
+            {
+                return "";
+            }
+            return "W: "+Work;
+        }
+
+        private string AddedM(string telephoneHome)
+        {
+            if (Mobile == null || Mobile == "")
+            {
+                return "";
+            }
+            return "M: "+Mobile;
+        }
+
+        private string AddedH(string telephoneHome)
+        {
+            if (Home == null || Home == "")
+            {
+                return "";
+            }
+            return "H: "+Home;
+        }
+
+        private string CheckNewLineBeforeW(string v)
+        {
+            if (Work == null || Work == "")
+            {
+                return null;
+            }
+            else
+            {
+                if (Work != null || Work != "")
+                {
+                    if (Mobile != null || Mobile != "")
+                    {
+                        return "\r\n";
+                    }
+                }
+                return null;
+            }
+
+        }
+
+        private string CheckNewLineBeforeM(string v)
+        {
+            if (Mobile == null || Mobile == "")
+            {
+                return null;
+            }
+            else
+            {
+                if (Mobile != null || Mobile != "")
+                {
+                    if (Home != null || Home != "")
+                    {
+                        return "\r\n";
+                    }
+                }
+                return null;
+            }
+
+        }
+
+        private string CheckIfSpaceNeeded(string v)
+        {
+            if (FirstName == null || FirstName == "")
+            {
+                return null;
+            }
+            if (LastName == null || LastName == "")
+            {
+                return null;
+            }
+            else
+            {
+                return " ";
+            }
+        }
+
+    }
+    }

@@ -6,6 +6,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
@@ -223,7 +224,7 @@ namespace WebAddressBookTests
             string email = driver.FindElement(By.Name("email")).GetAttribute("value");
             string email2 = driver.FindElement(By.Name("email2")).GetAttribute("value");
             string email3 = driver.FindElement(By.Name("email3")).GetAttribute("value");
-            string secondaryHome = driver.FindElement(By.Name("phone2")).GetAttribute("value");
+           // string secondaryHome = driver.FindElement(By.Name("phone2")).GetAttribute("value");
 
             return new ContactData(firstName, lastName)
             {
@@ -233,8 +234,8 @@ namespace WebAddressBookTests
                 Work = workPhone,
                 Email = email,
                 Email2 = email2,
-                Email3 = email3,
-                SecondaryHome = secondaryHome
+                Email3 = email3
+                //SecondaryHome = secondaryHome
                 
             };
         }
@@ -245,6 +246,20 @@ namespace WebAddressBookTests
               Match m =  new Regex(@"\d+").Match(text);
                 return Int32.Parse(m.Value);
             }
-        }
+        
 
+    public  ContactData GetContactInformationFromContactProperties(int index)
+    {
+        manager.Navigator.GoToHomePage();
+        driver.FindElements(By.Name("entry"))[index]
+          .FindElements(By.TagName("td"))[6]
+           .FindElement(By.TagName("a")).Click();
+        string text = driver.FindElement(By.XPath("//div[@id='content']")).Text;
+
+        return new ContactData(text)
+        {
+            AllData = text,
+    };
     }
+}}
+
